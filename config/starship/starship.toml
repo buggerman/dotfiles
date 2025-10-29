@@ -1,0 +1,42 @@
+# ~/.config/starship.toml
+# -------------------------------------------------------------------
+# global layout: add one leading space before directory for padding
+format = " $directory$git_branch$git_state$python$node $character"
+add_newline = false
+
+[directory]
+style = "cyan"
+truncate_to_repo = true
+truncation_length = 3
+
+[git_branch]
+symbol = "⎇ "
+style = "yellow"
+format = " [$symbol$branch]($style)"
+
+[git_state]
+format = " [$state( $progress_current/$progress_total)]($style)"
+style = "yellow"
+
+[python]
+style = "green"
+format = " [py:${version}]($style)"
+# pyenv_version_name = true
+# detect_files = ["pyproject.toml", ".python-version", "requirements.txt"]
+# Hide if no Python context is detected
+disabled = false
+detect_extensions = []
+detect_files = []
+detect_folders = []
+
+[nodejs]
+style = "green"
+format = " [node:${version}]($style)"
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+[character]
+success_symbol = "❯"
+error_symbol   = "❯"
+vicmd_symbol   = "❮"
+# add a space before and after the arrow for comfortable spacing
+format = "[$symbol](green) "
