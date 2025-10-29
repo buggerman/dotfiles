@@ -182,13 +182,3 @@ MIT￼
 Minimal, reproducible, and elegant — because your shell should feel like home.
 
 ---
-
-✅ **How to use:**
-1. Save this file as `README.md` in your `dotfiles` repo.  
-2. Commit & push:
-   ```bash
-   git add README.md bootstrap.sh
-   git commit -m "Add bootstrap script and project readme"
-   git push
-
-	3.	It’ll display beautifully on GitHub.
