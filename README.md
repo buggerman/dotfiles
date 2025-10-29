@@ -32,16 +32,17 @@ A minimal, reproducible macOS environment powered by **Zsh**, **uv**, **fnm**, a
 
 ## 📁 Layout
 
-dotfiles/
-├─ bootstrap.sh
-├─ zsh/
-│  └─ .zshrc
-├─ config/
-│  ├─ starship/
-│  │  └─ starship.toml
-│  └─ uv/
-│     └─ config.toml        # optional; generated if missing
-└─ .ripgreprc               # optional
+dotfiles/  
+├─ bootstrap.sh  
+├─ zsh/  
+│  └─ .zshrc  
+├─ config/  
+│  ├─ starship/  
+│  │  └─ starship.toml  
+│  └─ uv/  
+│     └─ config.toml        # optional; generated if missing  
+└─ .ripgreprc               # optional  
+
 
 > The `.zshrc` uses `$TERM_PROGRAM` to split behavior:
 > - `iTerm.app` → OMZ + Starship + icons, etc.
