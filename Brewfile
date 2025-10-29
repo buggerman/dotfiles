@@ -1,0 +1,16 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+
+brew "git"
+brew "zsh"
+brew "fnm"
+brew "uv"
+brew "direnv"
+brew "bat"
+brew "ripgrep"
+brew "eza"
+brew "starship"
+brew "neovim"
+
+cask "font-monaspace-neon-nerd-font"
