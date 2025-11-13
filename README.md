@@ -7,7 +7,7 @@ A minimal, reproducible macOS environment powered by **Zsh**, **uv**, **fnm**, a
 ---
 
 ## ✨ Features
-
+ 
 ### 💻 Shell & UX
 - macOS **/bin/zsh** (no Homebrew zsh) with a clean, fast config
 - **Conditional config by terminal**
