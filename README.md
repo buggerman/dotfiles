@@ -38,6 +38,19 @@ dotfiles/
 ├─ zsh/
 │  └─ .zshrc
 ├─ config/
+│  ├─ nvim/                 # Neovim/NvChad configuration
+│  │  ├─ README.md          # Detailed nvim config docs
+│  │  ├─ init.lua           # Main config with transparency
+│  │  └─ lua/
+│  │     ├─ neovide_settings.lua  # Neovide-specific settings
+│  │     ├─ chadrc.lua      # NvChad theme config
+│  │     ├─ options.lua     # Vim options
+│  │     ├─ mappings.lua    # Keybindings
+│  │     └─ autocmds.lua    # Autocommands
+│  ├─ ghostty/
+│  │  └─ config             # Ghostty terminal config
+│  ├─ neovide/
+│  │  └─ config.toml        # Neovide GUI config
 │  ├─ starship/
 │  │  └─ starship.toml
 │  └─ uv/
@@ -48,6 +61,8 @@ dotfiles/
 > The `.zshrc` uses `$TERM_PROGRAM` to split behavior:
 > - `iTerm.app` → OMZ + Starship + icons, etc.
 > - `Apple_Terminal` → vanilla
+
+> **Neovim Configuration**: See `config/nvim/README.md` for detailed documentation on NvChad setup, transparency, Neovide integration, and customization options.
 
 ---
 
@@ -62,9 +77,12 @@ bash ~/dotfiles/bootstrap.sh
 
 # 3) Reload
 exec $SHELL
+```
 
-iTerm2 tip: Preferences → Profiles → Text → Font → select “Monaspace Neon Nerd Font” (installed by bootstrap).
+iTerm2 tip: Preferences → Profiles → Text → Font → select "Monaspace Neon Nerd Font" (installed by bootstrap).
 Terminal.app: keep Monaco to stay icon-free.
+
+> **Note**: Neovim configuration is managed by the [repeatable-environment](https://github.com/buggerman/repeatable-environment) Ansible playbook, which clones NvChad and symlinks these config files. For full environment setup including Neovim, Ghostty, Neovide, and more, use the Ansible playbook instead.
 
 ⸻
 
