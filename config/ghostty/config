@@ -1,0 +1,22 @@
+# --- FONT & THEME ---
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+theme = Dracula
+
+# --- VISUALS (Blur & Transparency) ---
+background-opacity = 0.85
+background-blur-radius = 20
+
+# --- THE NEOVIDE CURSOR ---
+# Points to the shader file (see step 2 below)
+custom-shader = "./shaders/ghostty-cursor-shaders/cursor_warp.glsl"
+custom-shader-animation = always
+# shell-integration = detect
+# cursor-style = block
+shell-integration-features = no-cursor
+
+# --- WINDOW ---
+window-padding-x = 10
+window-padding-y = 10
+window-width = 108
+window-height = 30

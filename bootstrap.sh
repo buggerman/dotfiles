@@ -28,17 +28,24 @@ fi
 echo "→ Updating Homebrew"
 brew update
 
-echo "→ Installing core CLI tools"
+echo "→ Installing core CLI tools and applications"
 brew install git uv fnm direnv eza bat ripgrep starship neovim
 
-echo "→ (Optional) Installing Nerd Font for iTerm2"
+echo "→ Installing GUI applications"
+brew install --cask ghostty neovide || true
+
+echo "→ Installing Nerd Fonts"
 brew tap homebrew/cask-fonts
 brew install --cask font-monaspace-neon-nerd-font || true
+brew install --cask font-jetbrains-mono-nerd-font || true
 
 # Create config dirs
 mkdir -p "$HOME/.config"
 mkdir -p "$HOME/.config/starship"
 mkdir -p "$HOME/.config/uv"
+mkdir -p "$HOME/.config/ghostty/shaders"
+mkdir -p "$HOME/.config/neovide"
+mkdir -p "$HOME/.config/nvim/lua"
 
 # Link files from repo if they exist
 link() {
@@ -60,11 +67,34 @@ link() {
 #   config/uv/config.toml (optional; generated if missing)
 #   .ripgreprc (optional)
 
-link "$DOTFILES_DIR/zsh/.zshrc"                      "$HOME/.zshrc"
-link "$DOTFILES_DIR/config/starship/starship.toml"   "$HOME/.config/starship.toml"
-link "$DOTFILES_DIR/.ripgreprc"                      "$HOME/.ripgreprc"
+link "$DOTFILES_DIR/zsh/.zshrc"                           "$HOME/.zshrc"
+link "$DOTFILES_DIR/config/starship/starship.toml"        "$HOME/.config/starship.toml"
+link "$DOTFILES_DIR/.ripgreprc"                           "$HOME/.ripgreprc"
+link "$DOTFILES_DIR/config/ghostty/config"                "$HOME/.config/ghostty/config"
+link "$DOTFILES_DIR/config/ghostty/shaders/neovide.glsl"  "$HOME/.config/ghostty/shaders/neovide.glsl"
+link "$DOTFILES_DIR/config/neovide/config.toml"           "$HOME/.config/neovide/config.toml"
+link "$DOTFILES_DIR/config/nvim/lua/neovide_settings.lua" "$HOME/.config/nvim/lua/neovide_settings.lua"
+link "$DOTFILES_DIR/config/uv/config.toml"                "$HOME/.config/uv/config.toml"
 
-# Ensure uv default Python (3.14) if user doesn’t have a config yet
+# Clone NvChad starter if not already present
+if [ ! -d "$HOME/.config/nvim/.git" ]; then
+  echo "→ Cloning NvChad starter"
+  git clone https://github.com/NvChad/starter "$HOME/.config/nvim"
+  # Link our custom neovide_settings.lua
+  link "$DOTFILES_DIR/config/nvim/lua/neovide_settings.lua" "$HOME/.config/nvim/lua/neovide_settings.lua"
+else
+  echo "• Neovim config already exists, skipping clone"
+fi
+
+# Clone ghostty-cursor-shaders if not already present
+if [ ! -d "$HOME/.config/ghostty/shaders/ghostty-cursor-shaders" ]; then
+  echo "→ Cloning ghostty-cursor-shaders"
+  git clone https://github.com/sahaj-b/ghostty-cursor-shaders "$HOME/.config/ghostty/shaders/ghostty-cursor-shaders"
+else
+  echo "• Ghostty cursor shaders already exist, skipping clone"
+fi
+
+# Ensure uv default Python (3.14) if user doesn't have a config yet
 UV_CFG="$HOME/.config/uv/config.toml"
 if [ ! -f "$UV_CFG" ]; then
   echo "→ Creating uv config (default Python 3.14)"
@@ -87,4 +117,9 @@ git config --global user.name  "${GIT_NAME:-$GIT_NAME_DEFAULT}"    || true
 git config --global user.email "${GIT_EMAIL:-$GIT_EMAIL_DEFAULT}"  || true
 
 echo "→ Done. Open a new shell or run: exec \$SHELL"
-echo "Tip: In iTerm2, set font to 'Monaspace Neon Nerd Font' for icons; keep Terminal.app on Monaco for vanilla look."
+echo ""
+echo "Next steps:"
+echo "  1. Launch Ghostty (GUI apps installed via Homebrew cask)"
+echo "  2. Font: JetBrainsMono Nerd Font should be available"
+echo "  3. Open Neovim - NvChad will auto-install plugins on first run"
+echo "  4. For Neovide: Run 'neovide' from terminal for GUI Neovim with cursor effects"

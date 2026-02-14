@@ -4,13 +4,19 @@
 
 # User-level bin paths (uv, uvx, scripts)
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+# Lazy Python 3.14: The "Global" Shortcut
+# This is better than hardcoding the 3.14 path because uv handles the lookup.
+alias py3='uv run --python 3.14 python3'
+alias python='py3'
 
 # Preferred editor
 export EDITOR="nvim"
 export VISUAL="nvim"
 
 #### ─────────────────────────── PER-TERMINAL BEHAVIOR ───────────────────────────
-if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
+if [[ "$TERM_PROGRAM" == "iTerm.app" || "$TERM_PROGRAM" == "ghostty" ]]; then
   #### iTerm2: fancy setup (icons, starship, OMZ, aliases)
 
   # Oh My Zsh (eastwood etc.)
@@ -36,6 +42,14 @@ if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
 
   # Starship prompt
   command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+
+  # Blazing fast uv completions (only in iTerm)
+    if (( $+commands[uv] )); then
+        eval "$(uv generate-shell-completion zsh)"
+    fi
+
+    # Use uv for pip commands globally
+    alias pip='uv pip'
 
 else
   #### Terminal.app: vanilla (Monaco, stock tools, default prompt)
@@ -69,3 +83,6 @@ export LESS='-RFX'
 
 # (Optional) uv: if you want shell `python` to be uv’s 3.14 everywhere, uncomment:
 # export PATH="$HOME/.local/share/uv/python/3.14.x/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

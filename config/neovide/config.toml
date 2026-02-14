@@ -1,0 +1,7 @@
+# This removes the titlebar on your Mac
+frame = "transparent"
+idle = true
+
+[font]
+normal = ["JetBrainsMono Nerd Font"]
+size = 14.0
